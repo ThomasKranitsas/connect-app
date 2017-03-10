@@ -13,7 +13,10 @@ const SpecSection = props => {
   const renderSubSection = (subSection, idx) => (
     <div key={idx} className="section-features-module" id={[id, subSection.id].join('-')}>
       <div className="sub-title">
-        <h4 className="title">{typeof subSection.title === 'function' ? subSection.title(project): subSection.title } <span>*</span></h4>
+        <h4 className="title">
+          {typeof subSection.title === 'function' ? subSection.title(project): subSection.title }
+          {subSection.required ? <span> *</span> : null}
+        </h4>
       </div>
       <div className="content-boxs">
         {renderChild(subSection)}
@@ -24,7 +27,7 @@ const SpecSection = props => {
   const onValidate = (isInvalid) => validate(isInvalid)
 
   const renderChild = props => {
-    const {type} = props
+    const {type, required} = props
     switch(type) {
     case 'tabs': {
       const tabs = _.get(props, 'tabs')
@@ -45,6 +48,7 @@ const SpecSection = props => {
           showFeaturesDialog={showFeaturesDialog}
           resetFeatures={resetFeatures}
           questions={props.questions}
+          isRequired={props.required}
           project={project}
         />
       )

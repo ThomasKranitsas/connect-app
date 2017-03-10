@@ -29,7 +29,7 @@ const getIcon = icon => {
   }
 }
 
-const SpecQuestions = ({questions, project, resetFeatures, showFeaturesDialog}) => {
+const SpecQuestions = ({questions, project, resetFeatures, showFeaturesDialog, isRequired}) => {
 
   const renderQ = (q, index) => {
     // let child = null
@@ -115,6 +115,7 @@ const SpecQuestions = ({questions, project, resetFeatures, showFeaturesDialog}) 
         title={q.title}
         icon={getIcon(q.icon)}
         description={q.description}
+        required={isRequired}
       >
         <ChildElem {...elemProps} />
       </SpecQuestionList.Item>
@@ -132,7 +133,8 @@ SpecQuestions.propTypes = {
   project: PropTypes.object.isRequired,
   showFeaturesDialog: PropTypes.func.isRequired,
   resetFeatures: PropTypes.func.isRequired,
-  questions: PropTypes.arrayOf(PropTypes.object).isRequired
+  questions: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isRequired: PropTypes.bool
 }
 
 export default SpecQuestions
